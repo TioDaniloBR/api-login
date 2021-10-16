@@ -67,6 +67,9 @@ class Login{
 
     authorized(req, res, next){
         const bearerToken = req.headers['authorization'];
+        if(!bearerToken){
+            return res.status(500).json({auth:false, message:'No one authorization method was provided'});
+        }
         const token = bearerToken.split(' ')[0] === 'Bearer' ? bearerToken.split(' ')[1] : null;
         if(!token){
             return res.status(401).json({auth:false, message:'No token provided'});
