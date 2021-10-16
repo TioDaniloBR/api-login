@@ -3,18 +3,19 @@
 const { Router } = require('express');
 const routes = Router();
 
+const loginController = require('../login/controllers/login.controller');
 const incomeController = require('./controllers/expense.controller');
 
-routes.post('/create', async(req, res ,next)=>{
+routes.post('/create', loginController.authorized, async(req, res ,next)=>{
     res.send(await incomeController.create(req));
 });
-routes.get('/find', async(req, res, next) => {
+routes.get('/find', loginController.authorized, async(req, res, next) => {
     res.send(await incomeController.findAll(req));
 });
-routes.put('/update', async(req, res, next)=>{
+routes.put('/update', loginController.authorized, async(req, res, next)=>{
     res.send(await incomeController.update(req));
 });
-routes.delete('/delete', async(req, res, next)=>{
+routes.delete('/delete', loginController.authorized, async(req, res, next)=>{
     res.send(await incomeController.delete(req));
 })
 
