@@ -10,4 +10,4 @@ const ExpenseSchema = Schema({
     owner: {type: String, required:true}
 });
 
-module.exports = mongoose.model('income',ExpenseSchema);
+module.exports = mongoose.model('expense',ExpenseSchema);
